@@ -3480,7 +3480,7 @@ class AutoBalance_PlayerScript : public PlayerScript
         void OnLogin(Player *Player) override
         {
             if (EnableGlobal && Announcement) {
-                ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00AutoBalance |rmodule.");
+                ChatHandler(Player->GetSession()).SendSysMessage("服务器已启用 |cff4CFF00弹性副本 |r模块。");
             }
         }
 
@@ -3707,7 +3707,7 @@ class AutoBalance_PlayerScript : public PlayerScript
                     {
                         if (player && player->GetSession())
                         {
-                            ChatHandler(player->GetSession()).PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 Combat has ended. Difficulty is no longer locked.|r");
+                            ChatHandler(player->GetSession()).PSendSysMessage("|cffc3dbff [弹性副本]|r|cffFF8000 战斗已结束。难度锁定已解除。|r");
                         }
                     }
                 }
@@ -4634,11 +4634,11 @@ class AutoBalance_AllMapScript : public AllMapScript
                                 ChatHandler chatHandle = ChatHandler(thisPlayer->GetSession());
                                 InstanceMap* instanceMap = map->ToInstanceMap();
 
-                                std::string instanceDifficulty; if (instanceMap->IsHeroic()) instanceDifficulty = "Heroic"; else instanceDifficulty = "Normal";
+                                std::string instanceDifficulty; if (instanceMap->IsHeroic()) instanceDifficulty = "英雄"; else instanceDifficulty = "普通";
 
                                 if (thisPlayer && thisPlayer == player) // This is the player that entered
                                 {
-                                    chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 Welcome to %s (%u-player %s). There are %u player(s) in this instance. Difficulty set to %u player(s).|r",
+                                    chatHandle.PSendSysMessage("|cffc3dbff [弹性副本]|r|cffFF8000 欢迎来到 %s (%u人 （%s）)。副本中共有 %u 名玩家。副本难度设置为 %u 人。|r",
                                         map->GetMapName(),
                                         instanceMap->GetMaxPlayers(),
                                         instanceDifficulty,
@@ -4649,7 +4649,7 @@ class AutoBalance_AllMapScript : public AllMapScript
                                     // notify GMs that they won't be accounted for
                                     if (player->IsGameMaster())
                                     {
-                                        chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 Your GM flag is turned on. AutoBalance will ignore you. Please turn GM off and exit/re-enter the instance if you'd like to be considering for AutoBalancing.|r");
+                                        chatHandle.PSendSysMessage("|cffc3dbff [弹性副本]|r|cffFF8000 你已开启GM模式。弹性修正对你无效。如果你不想被忽略，请关闭GM模式，并退出/重新进入副本。|r");
                                     }
                                 }
                                 else
@@ -4657,7 +4657,7 @@ class AutoBalance_AllMapScript : public AllMapScript
                                     // announce non-GMs entering the instance only
                                     if (!player->IsGameMaster())
                                     {
-                                        chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 %s enters the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r",
+                                        chatHandle.PSendSysMessage("|cffc3dbff [弹性副本]|r|cffFF8000 %s 进入了副本。当前副本内共有 %u 名玩家。副本难度设置为 %u 人。|r",
                                             player->GetName().c_str(),
                                             mapABInfo->playerCount,
                                             mapABInfo->adjustedPlayerCount
@@ -4770,14 +4770,14 @@ class AutoBalance_AllMapScript : public AllMapScript
 
                                 if (mapABInfo->combatLocked)
                                 {
-                                    chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 %s left the instance while combat was in progress. Difficulty locked to no less than %u players until combat ends.|r",
+                                    chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 %s 在战斗中离开了副本。战斗结束前，难度将保持不少于 %u 人不变。|r",
                                         player->GetName().c_str(),
                                         mapABInfo->adjustedPlayerCount
                                     );
                                 }
                                 else
                                 {
-                                    chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 %s left the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r",
+                                    chatHandle.PSendSysMessage("|cffc3dbff [AutoBalance]|r|cffFF8000 %s 离开了副本。当前副本中有 %u 名玩家。难度设置为 %u 人。|r",
                                         player->GetName().c_str(),
                                         mapABInfo->playerCount,
                                         mapABInfo->adjustedPlayerCount
@@ -6458,7 +6458,7 @@ public:
         if (!*args)
         {
             handler->PSendSysMessage(".autobalance setoffset #");
-            handler->PSendSysMessage("Sets the Player Difficulty Offset for instances. Example: (You + offset(1) = 2 player difficulty).");
+            handler->PSendSysMessage("设置副本难度偏移。例：(你 + offset(1) = 2 人)。");
             return false;
         }
         char* offset = strtok((char*)args, " ");
@@ -6467,19 +6467,19 @@ public:
         if (offset)
         {
             offseti = (uint32)atoi(offset);
-            handler->PSendSysMessage("Changing Player Difficulty Offset to %i.", offseti);
+            handler->PSendSysMessage("玩家难度偏移设置为 %i。", offseti);
             PlayerCountDifficultyOffset = offseti;
             globalConfigTime = GetCurrentConfigTime();
             return true;
         }
         else
-            handler->PSendSysMessage("Error changing Player Difficulty Offset! Please try again.");
+            handler->PSendSysMessage("设置玩家难度偏移时出错！请重试。");
         return false;
     }
 
     static bool HandleABGetOffsetCommand(ChatHandler* handler, const char* /*args*/)
     {
-        handler->PSendSysMessage("Current Player Difficulty Offset = %i", PlayerCountDifficultyOffset);
+        handler->PSendSysMessage("当前副本难度偏移 = %i", PlayerCountDifficultyOffset);
         return true;
     }
 
@@ -6493,19 +6493,19 @@ public:
         {
             handler->PSendSysMessage("---");
             // Map basics
-            handler->PSendSysMessage("%s (%u-player %s) | ID %u-%u%s",
+            handler->PSendSysMessage("%s (%u 人（%s）) | 副本ID %u-%u%s",
                                     player->GetMap()->GetMapName(),
                                     player->GetMap()->ToInstanceMap()->GetMaxPlayers(),
-                                    player->GetMap()->ToInstanceMap()->IsHeroic() ? "Heroic" : "Normal",
+                                    player->GetMap()->ToInstanceMap()->IsHeroic() ? "英雄" : "普通",
                                     player->GetMapId(),
                                     player->GetInstanceId(),
-                                    mapABInfo->enabled ? "" : " | AutoBalance DISABLED");
+                                    mapABInfo->enabled ? "" : " | 弹性副本已禁用");
 
             // if the map isn't enabled, don't display anything else
             // if (!mapABInfo->enabled) { return true; }
 
             // Player stats
-            handler->PSendSysMessage("Players on map: %u (Lvl %u - %u)",
+            handler->PSendSysMessage("副本玩家数量： %u（等级 %u - %u）",
                                     mapABInfo->playerCount,
                                     mapABInfo->lowestPlayerLevel,
                                     mapABInfo->highestPlayerLevel
@@ -6514,59 +6514,59 @@ public:
             // Adjusted player count (multiple scenarios)
             if (mapABInfo->combatLockTripped)
             {
-                handler->PSendSysMessage("Adjusted Player Count: %u (Combat Locked)", mapABInfo->adjustedPlayerCount);
+                handler->PSendSysMessage("调整后玩家数量：%u（战斗锁定）", mapABInfo->adjustedPlayerCount);
             }
             else if (mapABInfo->playerCount < mapABInfo->minPlayers && !PlayerCountDifficultyOffset)
             {
-                handler->PSendSysMessage("Adjusted Player Count: %u (Map Minimum)", mapABInfo->adjustedPlayerCount);
+                handler->PSendSysMessage("调整后玩家数量：%u（副本最低限制）", mapABInfo->adjustedPlayerCount);
             }
             else if (mapABInfo->playerCount < mapABInfo->minPlayers && PlayerCountDifficultyOffset)
             {
-                handler->PSendSysMessage("Adjusted Player Count: %u (Map Minimum + Difficulty Offset of %u)", mapABInfo->adjustedPlayerCount, PlayerCountDifficultyOffset);
+                handler->PSendSysMessage("调整后玩家数量：%u（副本最低限制 + 难度偏移 %u）", mapABInfo->adjustedPlayerCount, PlayerCountDifficultyOffset);
             }
             else if (PlayerCountDifficultyOffset)
             {
-                handler->PSendSysMessage("Adjusted Player Count: %u (Difficulty Offset of %u)", mapABInfo->adjustedPlayerCount, PlayerCountDifficultyOffset);
+                handler->PSendSysMessage("调整后玩家数量：%u（难度偏移 %u）", mapABInfo->adjustedPlayerCount, PlayerCountDifficultyOffset);
             }
             else
             {
-                handler->PSendSysMessage("Adjusted Player Count: %u", mapABInfo->adjustedPlayerCount);
+                handler->PSendSysMessage("调整后玩家数量：%u", mapABInfo->adjustedPlayerCount);
             }
 
             // LFG levels
-            handler->PSendSysMessage("LFG Range: Lvl %u - %u (Target: Lvl %u)", mapABInfo->lfgMinLevel, mapABInfo->lfgMaxLevel, mapABInfo->lfgTargetLevel);
+            handler->PSendSysMessage("寻找组队等级范围：%u - %u（副本等级：%u）", mapABInfo->lfgMinLevel, mapABInfo->lfgMaxLevel, mapABInfo->lfgTargetLevel);
 
             // Calculated map level (creature average)
-            handler->PSendSysMessage("Map Level: %u%s",
+            handler->PSendSysMessage("副本等级：%u%s",
                                     (uint8)(mapABInfo->avgCreatureLevel+0.5f),
-                                    mapABInfo->isLevelScalingEnabled && mapABInfo->enabled ? "->" + std::to_string(mapABInfo->highestPlayerLevel) + " (Level Scaling Enabled)" : " (Level Scaling Disabled)"
+                                    mapABInfo->isLevelScalingEnabled && mapABInfo->enabled ? "->" + std::to_string(mapABInfo->highestPlayerLevel) + " （等级缩放已启用）" : " （等级缩放已禁用）"
                                     );
 
             // World Health Multiplier
-            handler->PSendSysMessage("World health multiplier: %.3f", mapABInfo->worldHealthMultiplier);
+            handler->PSendSysMessage("世界生命值系数：%.3f", mapABInfo->worldHealthMultiplier);
 
             // World Damage and Healing Multiplier
             if (mapABInfo->worldDamageHealingMultiplier != mapABInfo->scaledWorldDamageHealingMultiplier)
             {
-                handler->PSendSysMessage("World hostile damage and healing multiplier: %.3f -> %.3f",
+                handler->PSendSysMessage("世界敌对伤害和治疗系数：%.3f -> %.3f",
                         mapABInfo->worldDamageHealingMultiplier,
                         mapABInfo->scaledWorldDamageHealingMultiplier
                         );
             }
             else
             {
-                handler->PSendSysMessage("World hostile damage and healing multiplier: %.3f",
+                handler->PSendSysMessage("世界敌对伤害和治疗系数：%.3f",
                         mapABInfo->worldDamageHealingMultiplier
                         );
             }
 
             // Creature Stats
-            handler->PSendSysMessage("Original Creature Level Range: %u - %u (Avg: %.2f)",
+            handler->PSendSysMessage("原始怪物等级范围：%u - %u（平均：%.2f）",
                                     mapABInfo->lowestCreatureLevel,
                                     mapABInfo->highestCreatureLevel,
                                     mapABInfo->avgCreatureLevel
                                     );
-            handler->PSendSysMessage("Active | Total Creatures in map: %u | %u",
+            handler->PSendSysMessage("活动 | 总计 副本怪物总数：%u | %u",
                                     mapABInfo->activeCreatureCount,
                                     mapABInfo->allMapCreatures.size()
                                     );
@@ -6575,7 +6575,7 @@ public:
         }
         else
         {
-            handler->PSendSysMessage("This command can only be used in a dungeon or raid.");
+            handler->PSendSysMessage("该命令只能在副本中使用。");
             return false;
         }
     }
@@ -6592,7 +6592,7 @@ public:
         }
         else if (!target->GetMap()->IsDungeon())
         {
-            handler->PSendSysMessage("That target is not in an instance.");
+            handler->PSendSysMessage("目标不在副本中。");
             handler->SetSentErrorMessage(true);
             return false;
         }
@@ -6605,41 +6605,41 @@ public:
                                   targetABInfo->UnmodifiedLevel,
                                   isCreatureRelevant(target) && targetABInfo->UnmodifiedLevel != target->GetLevel() ? "->" + std::to_string(targetABInfo->selectedLevel) : "",
                                   isBossOrBossSummon(target) ? " | Boss" : "",
-                                  targetABInfo->isActive ? "Active for Map Stats" : "Ignored for Map Stats");
-        handler->PSendSysMessage("Creature difficulty level: %u player(s)", targetABInfo->instancePlayerCount);
+                                  targetABInfo->isActive ? "副本统计信息已激活" : "副本统计信息已忽略");
+        handler->PSendSysMessage("怪物难度等级：%u 人", targetABInfo->instancePlayerCount);
 
         // summon
         if (target->IsSummon() && targetABInfo->summoner && targetABInfo->isCloneOfSummoner)
         {
-            handler->PSendSysMessage("Clone of %s (%u)", targetABInfo->summonerName, targetABInfo->summonerLevel);
+            handler->PSendSysMessage("%s (%u)的镜像", targetABInfo->summonerName, targetABInfo->summonerLevel);
         }
         else if (target->IsSummon() && targetABInfo->summoner)
         {
-            handler->PSendSysMessage("Summon of %s (%u)", targetABInfo->summonerName, targetABInfo->summonerLevel);
+            handler->PSendSysMessage("%s (%u)的召唤物", targetABInfo->summonerName, targetABInfo->summonerLevel);
         }
         else if (target->IsSummon())
         {
-            handler->PSendSysMessage("Summon without a summoner.");
+            handler->PSendSysMessage("在没有召唤师的情况下进行召唤。");
         }
 
         // level scaled
         if (targetABInfo->UnmodifiedLevel != target->GetLevel())
         {
-            handler->PSendSysMessage("Health multiplier: %.3f -> %.3f", targetABInfo->HealthMultiplier, targetABInfo->ScaledHealthMultiplier);
-            handler->PSendSysMessage("Mana multiplier: %.3f -> %.3f", targetABInfo->ManaMultiplier, targetABInfo->ScaledManaMultiplier);
-            handler->PSendSysMessage("Armor multiplier: %.3f-> %.3f", targetABInfo->ArmorMultiplier, targetABInfo->ScaledArmorMultiplier);
-            handler->PSendSysMessage("Damage multiplier: %.3f -> %.3f", targetABInfo->DamageMultiplier, targetABInfo->ScaledDamageMultiplier);
+            handler->PSendSysMessage("生命值系数：%.3f -> %.3f", targetABInfo->HealthMultiplier, targetABInfo->ScaledHealthMultiplier);
+            handler->PSendSysMessage("法力值系数：%.3f -> %.3f", targetABInfo->ManaMultiplier, targetABInfo->ScaledManaMultiplier);
+            handler->PSendSysMessage("护甲值系数：%.3f-> %.3f", targetABInfo->ArmorMultiplier, targetABInfo->ScaledArmorMultiplier);
+            handler->PSendSysMessage("伤害值系数：%.3f -> %.3f", targetABInfo->DamageMultiplier, targetABInfo->ScaledDamageMultiplier);
         }
         // not level scaled
         else
         {
-            handler->PSendSysMessage("Health multiplier: %.3f", targetABInfo->HealthMultiplier);
-            handler->PSendSysMessage("Mana multiplier: %.3f", targetABInfo->ManaMultiplier);
-            handler->PSendSysMessage("Armor multiplier: %.3f", targetABInfo->ArmorMultiplier);
-            handler->PSendSysMessage("Damage multiplier: %.3f", targetABInfo->DamageMultiplier);
+            handler->PSendSysMessage("生命值系数：%.3f", targetABInfo->HealthMultiplier);
+            handler->PSendSysMessage("法力值系数：%.3f", targetABInfo->ManaMultiplier);
+            handler->PSendSysMessage("护甲值系数：%.3f", targetABInfo->ArmorMultiplier);
+            handler->PSendSysMessage("伤害值系数：%.3f", targetABInfo->DamageMultiplier);
         }
-        handler->PSendSysMessage("CC Duration multiplier: %.3f", targetABInfo->CCDurationMultiplier);
-        handler->PSendSysMessage("XP multiplier: %.3f  Money multiplier: %.3f", targetABInfo->XPModifier, targetABInfo->MoneyModifier);
+        handler->PSendSysMessage("冷却持续时间系数：%.3f", targetABInfo->CCDurationMultiplier);
+        handler->PSendSysMessage("经验值系数：%.3f  金币系数：%.3f", targetABInfo->XPModifier, targetABInfo->MoneyModifier);
 
         return true;
 
