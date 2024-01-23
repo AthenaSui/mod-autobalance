@@ -57,7 +57,7 @@ AutoBalance.Enable.OtherHeroic=1
 #        Example: AutoBalance.Disable.PerInstance="33, 43, 129"
 #
 #        Default: ""
-AutoBalance.Disable.PerInstance = ""
+AutoBalance.Disable.PerInstance = "33, 34, 36, 43, 47, 48, 70, 90, 109, 129, 209, 229, 230, 329, 349, 389, 429, 1001, 1004, 1007, 409, 469, 509, 531"
 
 ##########################
 #
@@ -942,8 +942,10 @@ AutoBalance.reward.enable = 0
 #       Default:
 #           raidToken -> emblem of frost (49426)
 #           dungeonToken -> emblem of triumph (47241)
-AutoBalance.reward.raidToken    = 49426
-AutoBalance.reward.dungeonToken = 47241
+#AutoBalance.reward.raidToken    = 49426
+#AutoBalance.reward.dungeonToken = 47241
+AutoBalance.reward.raidToken    = 29434
+AutoBalance.reward.dungeonToken = 29434
 
 #
 #   AutoBalance.reward.MinPlayerReward
