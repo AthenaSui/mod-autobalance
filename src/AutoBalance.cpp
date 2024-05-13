@@ -3602,7 +3602,7 @@ class AutoBalance_PlayerScript : public PlayerScript
         void OnLogin(Player *Player) override
         {
             if (EnableGlobal && Announcement) {
-                ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00AutoBalance |rmodule.");
+                ChatHandler(Player->GetSession()).SendSysMessage("服务器已启用 |cff4CFF00弹性副本 |r模块。");
             }
         }
 
@@ -5120,7 +5120,7 @@ public:
                 if (mapABInfo->enabled && PlayerChangeNotify && EnableGlobal) {
                     for (MapReference const& ref : creatureMap->GetPlayers()) {
                         if (Player const* playerHandle = ref.GetSource()) {
-                            ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [AutoBalance+NPCBots]|r|cffFF8000 %s (bot) entered %s. Auto setting player count to %i (Player Difficulty Offset = %i) |r",
+                            ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本|r|cffFF8000 %s（机器人）进入了 %s。自动将玩家数量设置为 %i （玩家难度偏移 = %i）|r",
                                 creature->GetName().c_str(), creatureMap->GetMapName(), mapABInfo->playerCount + PlayerCountDifficultyOffset, PlayerCountDifficultyOffset);
                         }
                     }
@@ -5201,7 +5201,7 @@ public:
                     if (mapABInfo->enabled && PlayerChangeNotify && EnableGlobal) {
                         for (MapReference const& ref : map->GetPlayers()) {
                             if (Player const* playerHandle = ref.GetSource()) {
-                                ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [AutoBalance+NPCBots]|r|cffFF8000 %s (bot) left %s. Auto setting player count to %i (Player Difficulty Offset = %i) |r",
+                                ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本]|r|cffFF8000 %s（机器人）离开了 %s。自动将玩家数量设置为 %i（玩家难度偏移 = %i）|r",
                                     creature->GetName().c_str(), map->GetMapName(), mapABInfo->playerCount + PlayerCountDifficultyOffset, PlayerCountDifficultyOffset);
                             }
                         }
@@ -6659,10 +6659,10 @@ public:
     {
         static std::vector<ChatCommand> ABCommandTable =
         {
-            { "setoffset",        SEC_GAMEMASTER,                        true, &HandleABSetOffsetCommand,                 "Sets the global Player Difficulty Offset for instances. Example: (You + offset(1) = 2 player difficulty)." },
-            { "getoffset",        SEC_PLAYER,                            true, &HandleABGetOffsetCommand,                 "Shows current global player offset value." },
-            { "mapstat",          SEC_PLAYER,                            true, &HandleABMapStatsCommand,                  "Shows current autobalance information for this map" },
-            { "creaturestat",     SEC_PLAYER,                            true, &HandleABCreatureStatsCommand,             "Shows current autobalance information for selected creature." },
+            { "setoffset",        SEC_GAMEMASTER,                        true, &HandleABSetOffsetCommand,                 "设置副本全局玩家难度偏移。例：（你 + offset(1) = 2 人）。" },
+            { "getoffset",        SEC_PLAYER,                            true, &HandleABGetOffsetCommand,                 "显示当前全局玩家偏移值。" },
+            { "mapstat",          SEC_PLAYER,                            true, &HandleABMapStatsCommand,                  "显示该副本当前平衡信息。" },
+            { "creaturestat",     SEC_PLAYER,                            true, &HandleABCreatureStatsCommand,             "显示目标当前弹性平衡信息。" },
         };
 
         static std::vector<ChatCommand> commandTable =
@@ -6715,19 +6715,19 @@ public:
         {
             handler->PSendSysMessage("---");
             // Map basics
-            handler->PSendSysMessage("%s (%u-player %s) | ID %u-%u%s",
+            handler->PSendSysMessage("%s (%u 人（%s）) | 副本ID %u-%u%s",
                                     player->GetMap()->GetMapName(),
                                     GetMapMaxPlayers(player->GetMap()),
-                                    player->GetMap()->ToInstanceMap() && player->GetMap()->ToInstanceMap()->IsHeroic() ? "Heroic" : "Normal",
+                                    player->GetMap()->ToInstanceMap() && player->GetMap()->ToInstanceMap()->IsHeroic() ? "英雄" : "普通",
                                     player->GetMapId(),
                                     player->GetInstanceId(),
-                                    mapABInfo->enabled ? "" : " | AutoBalance DISABLED");
+                                    mapABInfo->enabled ? "" : " | 弹性副本已禁用");
 
             // if the map isn't enabled, don't display anything else
             // if (!mapABInfo->enabled) { return true; }
 
             // Player stats
-            handler->PSendSysMessage("Players on map: %u (Lvl %u - %u)",
+            handler->PSendSysMessage("副本玩家数量： %u（等级 %u - %u）",
                                     mapABInfo->playerCount,
                                     mapABInfo->lowestPlayerLevel,
                                     mapABInfo->highestPlayerLevel
