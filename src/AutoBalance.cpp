@@ -4786,7 +4786,7 @@ class AutoBalance_AllMapScript : public AllMapScript
                                 ChatHandler chatHandle = ChatHandler(thisPlayer->GetSession());
                                 InstanceMap* instanceMap = map->ToInstanceMap();
 
-                                std::string instanceDifficulty; if (instanceMap && instanceMap->IsHeroic()) instanceDifficulty = "Heroic"; else instanceDifficulty = "Normal";
+                                std::string instanceDifficulty; if (instanceMap && instanceMap->IsHeroic()) instanceDifficulty = "英雄"; else instanceDifficulty = "普通";
 
                                 if (thisPlayer && thisPlayer == player) // This is the player that entered
                                 {

@@ -8,60 +8,60 @@
 #include <sstream>
 
 const std::unordered_map<LocaleConstant, std::string> AB_WELCOME_TO_PLAYER = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 Welcome to %s (%u-player %s). There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s (%u-player %s)에 오신 것을 환영합니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 Bienvenue dans %s (%u %s). Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 Willkommen in %s (%u Spieler %s). Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 欢迎来到 %s (%u人 （%s）)。副本中共有 %u 名玩家。副本难度设置为 %u 人。|r"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 歡迎來到 %s（%u人 %s）。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 Bienvenido a %s (%u jugador %s). Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
-    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|cffFF8000 Bienvenido a %s (%u jugador %s). Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
-    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|cffFF8000 Добро пожаловать в %s (%u игрок %s). В этом экземпляре %u игроков. Сложность установлена на %u игроков.|r"},
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Welcome to %s (%u-player %s). There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s (%u-player %s)에 오신 것을 환영합니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Bienvenue dans %s (%u %s). Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Willkommen in %s (%u Spieler %s). Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 欢迎来到 %s（%u人（%s））。副本中共有 %u 名玩家。副本难度设置为 %u 人。|r"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 歡迎來到 %s（%u人 %s）。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Bienvenido a %s (%u jugador %s). Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
+    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Bienvenido a %s (%u jugador %s). Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
+    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Добро пожаловать в %s (%u игрок %s). В этом экземпляре %u игроков. Сложность установлена на %u игроков.|r"},
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_WELCOME_TO_GM = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 Your GM flag is turned on. AutoBalance will ignore you. Please turn GM off and exit/re-enter the instance if you'd like to be considering for AutoBalancing.|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 GM 플래그가 켜져 있습니다. AutoBalance는 당신을 무시합니다. AutoBalancing을 고려하려면 GM을 끄고 인스턴스를 나가고 다시 들어가십시오.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 Votre drapeau GM est activé. AutoBalance vous ignorera. Veuillez désactiver GM et sortir/revenir dans l'instance si vous souhaitez être pris en compte pour l'AutoBalancing.|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 Ihre GM-Flagge ist eingeschaltet. AutoBalance wird Sie ignorieren. Bitte schalten Sie GM aus und verlassen Sie das Instanz, wenn Sie für das AutoBalancing berücksichtigt werden möchten.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 你已开启GM模式。弹性修正对你无效。如果你不想被忽略，请关闭GM模式，并退出/重新进入副本。|r"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 您的GM模式已打開。AutoBalance將忽略。如果您希望考慮自動平衡，請關閉GM並退出/重新進入副本。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 Su bandera de GM está encendida. AutoBalance te ignorará. Por favor, apague GM y salga/vuelva a entrar en la instancia si desea ser considerado para el AutoBalance.|r"},
-    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|cffFF8000 Su bandera de GM está encendida. AutoBalance te ignorará. Por favor, apague GM y salga/vuelva a entrar en la instancia si desea ser considerado para el AutoBalance.|r"},
-    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|cffFF8000 Ваш флаг GM включен. AutoBalance будет игнорировать вас. Пожалуйста, отключите GM и выйдите/войдите в экземпляр, если хотите, чтобы вас учитывали при автобалансировке.|r"},
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Your GM flag is turned on. AutoBalance will ignore you. Please turn GM off and exit/re-enter the instance if you'd like to be considering for AutoBalancing.|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 GM 플래그가 켜져 있습니다. AutoBalance는 당신을 무시합니다. AutoBalancing을 고려하려면 GM을 끄고 인스턴스를 나가고 다시 들어가십시오.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Votre drapeau GM est activé. AutoBalance vous ignorera. Veuillez désactiver GM et sortir/revenir dans l'instance si vous souhaitez être pris en compte pour l'AutoBalancing.|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Ihre GM-Flagge ist eingeschaltet. AutoBalance wird Sie ignorieren. Bitte schalten Sie GM aus und verlassen Sie das Instanz, wenn Sie für das AutoBalancing berücksichtigt werden möchten.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 你已开启GM模式。弹性修正对你无效。如果你不想被忽略，请关闭GM模式，然后退出并重新进入副本。|r"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 您的GM模式已打開。AutoBalance將忽略。如果您希望考慮自動平衡，請關閉GM並退出/重新進入副本。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Su bandera de GM está encendida. AutoBalance te ignorará. Por favor, apague GM y salga/vuelva a entrar en la instancia si desea ser considerado para el AutoBalance.|r"},
+    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Su bandera de GM está encendida. AutoBalance te ignorará. Por favor, apague GM y salga/vuelva a entrar en la instancia si desea ser considerado para el AutoBalance.|r"},
+    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Ваш флаг GM включен. AutoBalance будет игнорировать вас. Пожалуйста, отключите GM и выйдите/войдите в экземпляр, если хотите, чтобы вас учитывали при автобалансировке.|r"},
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_ANNOUNCE_NON_GM_ENTERING_INSTANCE = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s enters the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s이(가) 인스턴스에 들어왔습니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s entre dans l'instance. Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s betritt die Instanz. Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 %s 进入了副本。当前副本内共有 %u 名玩家。副本难度设置为 %u 人。"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s進入了副本。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s entra en la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
-    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s entra en la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
-    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s входит в экземпляр. В этом экземпляре %u игроков. Сложность установлена на %u игроков.|r"},
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s enters the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s이(가) 인스턴스에 들어왔습니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s entre dans l'instance. Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s betritt die Instanz. Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 %s 进入了副本。当前副本内共有 %u 名玩家。副本难度设置为 %u 人。"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s進入了副本。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s entra en la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
+    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s entra en la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
+    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s входит в экземпляр. В этом экземпляре %u игроков. Сложность установлена на %u игроков.|r"},
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_LEAVING_INSTANCE_COMBAT = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s left the instance while combat was in progress. Difficulty locked to no less than %u players until combat ends.|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s이(가) 전투 중에 인스턴스를 떠났습니다. 전투가 끝날 때까지 난이도가 %u명 미만으로 잠겨 있습니다.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s a quitté l'instance alors que le combat était en cours. La difficulté est verrouillée à pas moins de %u joueur(s) jusqu'à la fin du combat.|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s hat die Instanz verlassen, während der Kampf im Gange war. Die Schwierigkeit ist gesperrt, bis der Kampf endet, auf nicht weniger als %u Spieler.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 %s 在战斗中离开了副本。战斗结束前，难度将保持不少于 %u 人。|r"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s在戰鬥進行中離開了副本。直到戰鬥結束，難度鎖定為不少於 %u 名玩家。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s salió de la instancia mientras el combate estaba en progreso. La dificultad está bloqueada a no menos de %u jugador(es) hasta que termine el combate.|r"}
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s left the instance while combat was in progress. Difficulty locked to no less than %u players until combat ends.|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s이(가) 전투 중에 인스턴스를 떠났습니다. 전투가 끝날 때까지 난이도가 %u명 미만으로 잠겨 있습니다.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s a quitté l'instance alors que le combat était en cours. La difficulté est verrouillée à pas moins de %u joueur(s) jusqu'à la fin du combat.|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s hat die Instanz verlassen, während der Kampf im Gange war. Die Schwierigkeit ist gesperrt, bis der Kampf endet, auf nicht weniger als %u Spieler.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 %s 在战斗中离开了副本。战斗结束前，难度将保持不少于 %u 人。|r"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s在戰鬥進行中離開了副本。直到戰鬥結束，難度鎖定為不少於 %u 名玩家。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s salió de la instancia mientras el combate estaba en progreso. La dificultad está bloqueada a no menos de %u jugador(es) hasta que termine el combate.|r"}
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_LEAVING_INSTANCE = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s left the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s이(가) 인스턴스를 떠났습니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s a quitté l'instance. Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s hat die Instanz verlassen. Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 %s 离开了副本。当前副本中有 %u 名玩家。难度设置为 %u 人。|r"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s離開了副本。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s salió de la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
-    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|cffFF8000 %s salió de la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u"}
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s left the instance. There are %u player(s) in this instance. Difficulty set to %u player(s).|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s이(가) 인스턴스를 떠났습니다. 이 인스턴스에는 %u명의 플레이어가 있습니다. 난이도가 %u명으로 설정되었습니다.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s a quitté l'instance. Il y a %u joueur(s) dans cette instance. La difficulté est réglée sur %u joueur(s).|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s hat die Instanz verlassen. Es gibt %u Spieler in dieser Instanz. Schwierigkeit auf %u Spieler eingestellt.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 %s 离开了副本。当前副本中有 %u 名玩家。难度设置为 %u 人。|r"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s離開了副本。此副本中有 %u 名玩家。難度設定為 %u 名玩家。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s salió de la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u jugador(es).|r"},
+    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|0xFFFF00 %s salió de la instancia. Hay %u jugador(es) en esta instancia. La dificultad se establece en %u"}
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_SET_OFFSET_COMMAND_DESCRIPTION = {
@@ -345,7 +345,7 @@ const std::unordered_map<LocaleConstant, std::string> AB_CLONE_OF_SUMMON = {
     {LOCALE_koKR, "%s의 복제 (%u)|r"},
     {LOCALE_frFR, "Clone de %s (%u)|r"},
     {LOCALE_deDE, "Klon von %s (%u)|r"},
-    {LOCALE_zhCN, "%s (%u)的镜像|r"},
+    {LOCALE_zhCN, "%s（%u）的镜像|r"},
     {LOCALE_zhTW, "%s的克隆（%u）|r"},
     {LOCALE_esES, "Clon de %s (%u)|r"},
     {LOCALE_esMX, "Clon de %s (%u)|r"},
@@ -357,7 +357,7 @@ const std::unordered_map<LocaleConstant, std::string> AB_SUMMON_OF_SUMMON = {
     {LOCALE_koKR, "%s의 소환 (%u)|r"},
     {LOCALE_frFR, "Invocation de %s (%u)|r"},
     {LOCALE_deDE, "Beschwörung von %s (%u)|r"},
-    {LOCALE_zhCN, "%s (%u)的召唤物|r"},
+    {LOCALE_zhCN, "%s（%u）的召唤物|r"},
     {LOCALE_zhTW, "%s的召喚（%u）|r"},
     {LOCALE_esES, "Invocación de %s (%u)|r"},
     {LOCALE_esMX, "Invocación de %s (%u)|r"},
@@ -497,15 +497,15 @@ const std::unordered_map<LocaleConstant, std::string> AB_XP_MONEY_MULTIPLIER = {
 };
 
 const std::unordered_map<LocaleConstant, std::string> AB_LEAVING_INSTANCE_COMBAT_CHANGE = {
-    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|cffFF8000 Combat has ended. Difficulty is no longer locked.|r"},
-    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|cffFF8000 전투가 종료되었습니다. 난이도가 더 이상 잠겨 있지 않습니다.|r"},
-    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|cffFF8000 Le combat est terminé. La difficulté n'est plus verrouillée.|r"},
-    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|cffFF8000 Der Kampf ist vorbei. Die Schwierigkeit ist nicht mehr gesperrt.|r"},
-    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|cffFF8000 战斗已结束。难度锁定已解除。|r"},
-    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|cffFF8000 戰鬥已結束。難度不再被鎖定。|r"},
-    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|cffFF8000 El combate ha terminado. La dificultad ya no está bloqueada.|r"},
-    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|cffFF8000 El combate ha terminado. La dificultad ya no está bloqueada.|r"},
-    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|cffFF8000 Бой окончен. Сложность больше не заблокирована.|r"},
+    {LOCALE_enUS, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Combat has ended. Difficulty is no longer locked.|r"},
+    {LOCALE_koKR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 전투가 종료되었습니다. 난이도가 더 이상 잠겨 있지 않습니다.|r"},
+    {LOCALE_frFR, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Le combat est terminé. La difficulté n'est plus verrouillée.|r"},
+    {LOCALE_deDE, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Der Kampf ist vorbei. Die Schwierigkeit ist nicht mehr gesperrt.|r"},
+    {LOCALE_zhCN, "|cffc3dbff [弹性副本]|r|0xFFFF00 战斗已结束。难度锁定已解除。|r"},
+    {LOCALE_zhTW, "|cffc3dbff [AutoBalance]|r|0xFFFF00 戰鬥已結束。難度不再被鎖定。|r"},
+    {LOCALE_esES, "|cffc3dbff [AutoBalance]|r|0xFFFF00 El combate ha terminado. La dificultad ya no está bloqueada.|r"},
+    {LOCALE_esMX, "|cffc3dbff [AutoBalance]|r|0xFFFF00 El combate ha terminado. La dificultad ya no está bloqueada.|r"},
+    {LOCALE_ruRU, "|cffc3dbff [AutoBalance]|r|0xFFFF00 Бой окончен. Сложность больше не заблокирована.|r"},
 };
 
 std::unordered_map<std::string, const std::unordered_map<LocaleConstant, std::string>*> abTextMaps = {
