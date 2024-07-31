@@ -2745,14 +2745,14 @@ void UpdateMapPlayerStats(Map* map)
 
         if (thisPlayer && !thisPlayer->IsGameMaster())
         {
-            if (thisPlayer->getLevel() > highestPlayerLevel || highestPlayerLevel == 0)
+            if (thisPlayer->GetLevel() > highestPlayerLevel || highestPlayerLevel == 0)
             {
-                highestPlayerLevel = thisPlayer->getLevel();
+                highestPlayerLevel = thisPlayer->GetLevel();
             }
 
-            if (thisPlayer->getLevel() < lowestPlayerLevel || lowestPlayerLevel == 0)
+            if (thisPlayer->GetLevel() < lowestPlayerLevel || lowestPlayerLevel == 0)
             {
-                lowestPlayerLevel = thisPlayer->getLevel();
+                lowestPlayerLevel = thisPlayer->GetLevel();
             }
         }
     }
@@ -2821,14 +2821,14 @@ void AddPlayerToMap(Map* map, Player* player)
     {
         LOG_DEBUG("module.AutoBalance", "AutoBalance::AddPlayerToMap: Player {} ({}) | is already in the map's player list.",
             player->GetName(),
-            player->getLevel()
+            player->GetLevel()
         );
         return;
     }
 
     // add the player to the map's player list
     mapABInfo->allMapPlayers.push_back(player);
-    LOG_DEBUG("module.AutoBalance", "AutoBalance::AddPlayerToMap: Player {} ({}) | added to the map's player list.", player->GetName(), player->getLevel());
+    LOG_DEBUG("module.AutoBalance", "AutoBalance::AddPlayerToMap: Player {} ({}) | added to the map's player list.", player->GetName(), player->GetLevel());
 
     // update the map's player stats
     UpdateMapPlayerStats(map);
@@ -3610,7 +3610,7 @@ class AutoBalance_PlayerScript : public PlayerScript
         {
             LOG_DEBUG("module.AutoBalance", "AutoBalance:: {}", SPACER);
 
-            LOG_DEBUG("module.AutoBalance", "AutoBalance_PlayerScript::OnLevelChanged: {} has leveled ({}->{})", player->GetName(), oldlevel, player->getLevel());
+            LOG_DEBUG("module.AutoBalance", "AutoBalance_PlayerScript::OnLevelChanged: {} has leveled ({}->{})", player->GetName(), oldlevel, player->GetLevel());
             if (!player || player->IsGameMaster())
             {
                 return;
@@ -5120,7 +5120,7 @@ public:
                 if (mapABInfo->enabled && PlayerChangeNotify && EnableGlobal) {
                     for (MapReference const& ref : creatureMap->GetPlayers()) {
                         if (Player const* playerHandle = ref.GetSource()) {
-                            ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本|r|cffFF8000 %s（机器人）进入了 %s。自动将玩家数量设置为 %i （玩家难度偏移 = %i）|r",
+                            ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本|r|cffFF8000 {}（机器人）进入了 {}。自动将玩家数量设置为 {} （玩家难度偏移 = {}）|r",
                                 creature->GetName().c_str(), creatureMap->GetMapName(), mapABInfo->playerCount + PlayerCountDifficultyOffset, PlayerCountDifficultyOffset);
                         }
                     }
@@ -5201,7 +5201,7 @@ public:
                     if (mapABInfo->enabled && PlayerChangeNotify && EnableGlobal) {
                         for (MapReference const& ref : map->GetPlayers()) {
                             if (Player const* playerHandle = ref.GetSource()) {
-                                ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本]|r|cffFF8000 %s（机器人）离开了 %s。自动将玩家数量设置为 %i（玩家难度偏移 = %i）|r",
+                                ChatHandler(playerHandle->GetSession()).PSendSysMessage("|cffFF0000 [弹性副本]|r|cffFF8000 {}（机器人）离开了 {}。自动将玩家数量设置为 {}（玩家难度偏移 = {}）|r",
                                     creature->GetName().c_str(), map->GetMapName(), mapABInfo->playerCount + PlayerCountDifficultyOffset, PlayerCountDifficultyOffset);
                             }
                         }
@@ -6659,16 +6659,16 @@ public:
     {
         static std::vector<ChatCommand> ABCommandTable =
         {
-            { "setoffset",        SEC_GAMEMASTER,                        true, &HandleABSetOffsetCommand,                 "设置副本全局玩家难度偏移。例：（你 + offset(1) = 2 人）。" },
-            { "getoffset",        SEC_PLAYER,                            true, &HandleABGetOffsetCommand,                 "显示当前全局玩家偏移值。" },
-            { "mapstat",          SEC_PLAYER,                            true, &HandleABMapStatsCommand,                  "显示该副本当前平衡信息。" },
-            { "creaturestat",     SEC_PLAYER,                            true, &HandleABCreatureStatsCommand,             "显示目标当前弹性平衡信息。" },
+            { "setoffset",     HandleABSetOffsetCommand,      SEC_GAMEMASTER,  Console::Yes },
+            { "getoffset",     HandleABGetOffsetCommand,      SEC_PLAYER,      Console::Yes },
+            { "mapstat",       HandleABMapStatsCommand,       SEC_PLAYER,      Console::Yes },
+            { "creaturestat",  HandleABCreatureStatsCommand,  SEC_PLAYER,      Console::Yes }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "autobalance",     SEC_PLAYER,                             false, NULL,                      "", ABCommandTable },
-            { "ab",              SEC_PLAYER,                             false, NULL,                      "", ABCommandTable },
+            { "autobalance",  ABCommandTable },
+            { "ab",           ABCommandTable },
         };
         return commandTable;
     }
@@ -6715,7 +6715,7 @@ public:
         {
             handler->PSendSysMessage("---");
             // Map basics
-            handler->PSendSysMessage("%s (%u 人（%s）) | 副本ID %u-%u%s",
+            handler->PSendSysMessage("{} ({} 人（{}）) | 副本ID {}-{}{}",
                                     player->GetMap()->GetMapName(),
                                     GetMapMaxPlayers(player->GetMap()),
                                     player->GetMap()->ToInstanceMap() && player->GetMap()->ToInstanceMap()->IsHeroic() ? "英雄" : "普通",
@@ -6727,7 +6727,7 @@ public:
             // if (!mapABInfo->enabled) { return true; }
 
             // Player stats
-            handler->PSendSysMessage("副本玩家数量： %u（等级 %u - %u）",
+            handler->PSendSysMessage("副本玩家数量： {}（等级 {} - {}）",
                                     mapABInfo->playerCount,
                                     mapABInfo->lowestPlayerLevel,
                                     mapABInfo->highestPlayerLevel
@@ -6824,7 +6824,7 @@ public:
         AutoBalanceCreatureInfo *targetABInfo=target->CustomData.GetDefault<AutoBalanceCreatureInfo>("AutoBalanceCreatureInfo");
 
         handler->PSendSysMessage("---");
-        handler->PSendSysMessage("%s (%u%s%s), %s",
+        handler->PSendSysMessage("{} ({}{}{}), {}",
                                   target->GetName(),
                                   targetABInfo->UnmodifiedLevel,
                                   isCreatureRelevant(target) && targetABInfo->UnmodifiedLevel != target->GetLevel() ? "->" + std::to_string(targetABInfo->selectedLevel) : "",
@@ -6906,7 +6906,7 @@ public:
 
         for (Map::PlayerList::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
         {
-            if (!itr->GetSource() || itr->GetSource()->IsGameMaster() || itr->GetSource()->getLevel() < DEFAULT_MAX_LEVEL)
+            if (!itr->GetSource() || itr->GetSource()->IsGameMaster() || itr->GetSource()->GetLevel() < DEFAULT_MAX_LEVEL)
                 continue;
 
             itr->GetSource()->AddItem(reward, 1 + difficulty); // difficulty boost
