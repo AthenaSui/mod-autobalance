@@ -6794,12 +6794,12 @@ public:
                                     );
 
             return true;
-        }
+        }/*
         else
         {
             handler->PSendSysMessage(ABGetLocaleText(locale, "ab_command_only_in_instance").c_str());
             return false;
-        }
+        }*/
     }
 
     static bool HandleABCreatureStatsCommand(ChatHandler* handler, const char* /*args*/)
